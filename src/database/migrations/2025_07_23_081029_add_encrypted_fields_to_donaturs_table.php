@@ -12,10 +12,15 @@ return new class extends Migration
     public function up(): void
 {
     Schema::table('donaturs', function (Blueprint $table) {
-        $table->string('email_enkripsi')->nullable()->after('email');
-        $table->string('no_hp_enkripsi')->nullable()->after('no_hp');
+        if (!Schema::hasColumn('donaturs', 'email_enkripsi')) {
+            $table->string('email_enkripsi')->nullable()->after('email');
+        }
+        if (!Schema::hasColumn('donaturs', 'no_hp_enkripsi')) {
+            $table->string('no_hp_enkripsi')->nullable()->after('no_hp');
+        }
     });
 }
+
 
 public function down(): void
 {
